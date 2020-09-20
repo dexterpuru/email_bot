@@ -11,15 +11,15 @@ msg = EmailMessage()
 msg['Subject'] = "Pratyaksh's email bot"
 msg['From'] = add
 msg['To'] = 'pratyaksh2000saini@gmail.com'
-msg.set_content('01001000 01100101 01101100 01101100 01101111 00100001')
 
-with open('anime1.jpg', 'rb') as f:
-    file_data = f.read()
-    file_type = imghdr.what(f.name)
-    file_name = f.name
-
-msg.add_attachment(file_data, maintype='image',
-                   subtype=file_type, filename=file_name)
+msg.add_alternative("""\
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <h1 style="color: SlateGrey;">This is auto generated Email!</h1>
+        </body>
+    </html>
+""", subtype='html')
 
 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
     smtp.login(add, ps)
